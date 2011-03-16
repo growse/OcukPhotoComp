@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search Result</h1>
+
+<p>You looked for <strong>{{term}}</strong>. I found some things that might have something to do with that.</p>
+<div id="round_entries">
+	<h2>Rounds</h2>
+	{%for round in rounds%}
+	<div class="searchresult"><a href="/rounds/{{round.season.name}}/{{round.theme}}/" title="{{round.theme}}"><img src="{{photo_url|random}}{{round.winner.image_thumbnail}}.jpg" alt="{{round.theme}}" /></a><h3><a href="/rounds/{{round.season.name}}/{{round.theme}}/">{{round.theme}}</a> ({{round.season.name}})</h3><p class="clear_r"></p></div>
+	{%endfor%}
+	<h2>People</h2>
+	{%for person in people %}
+	<div class="searchresult"><a href="/people/{{person.name}}/" title="{{person.name}}"><img src="{{photo_url|random}}{{person.best_entry.image_thumbnail}}.jpg" alt="{{person.name}}" /></a><h3><a title="{{person.name}}" href="/people/{{person.name}}/">{{person.name}}</a></h3><p class="clear_r"></p></div>
+	{%endfor%}
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{person.name}}</h1>
+
+<h2>Some stats</h2>
+<table>
+	<tr><th>Total rounds entered</th><td>{{entries|length}}</td></tr>
+	<tr><th>Total rounds entered this season</th><td>{{entriescountseason}}</td></tr>
+	<tr><th>Average score</th><td>{{averagescore|floatformat}}</td></tr>
+	<tr><th>Average score this season</th><td>{{averagescoreseason|floatformat}}</td></tr>
+</table>
+
+<h2>Gallery</h2>
+
+<div id="usergallery">
+    <div id="selected">
+	    <a class="notext" rel="lightbox" href="{{photo_url|random}}{{entries.0.image_large}}.jpg" title="{{entries.0.round.theme}} ({{entries.0.round.season.name}}) - Score: {{entries.0.total_score}}"><img src="{{photo_url|random}}{{entries.0.image_medium}}.jpg" alt="{{entries.0.round.theme}} ({{entries.0.round.season.name}}) - Score: {{entries.0.total_score}}"/></a>
+	    <p id="selectedcaption"><a href="/rounds/{{entries.0.round.season.name}}/{{entries.0.round.theme}}/#{{person.name}}" title="{{entries.0.round.theme}} ({{entries.0.round.season.name}})">{{entries.0.round.theme}} ({{entries.0.round.season.name}})</a> - Score: {{entries.0.total_score}}</p>
+    </div>
+    <ul>
+	    {% for entry in entries %}
+	    <li><a class="notext" href="javascript:selectImage('{{entry.id}}','{{entry.round.season.name}}', '{{entry.round.theme}}', '{{entry.total_score}}','{{person.name}}');" title="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}"><img width="100" height="100" src="{{photo_url|random}}{{entry.image_squarethumbnail}}.jpg" alt="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}" /></a></li>
+	    {% endfor %}
+    </ul>
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Bulk add of reslts{% endblock %}
+
+{%block breadcrumbs %}<div class="breadcrumbs"><a href="/cp/">Home</a> &rsaquo; <a href="/cp/photocomp">Photocomp</a> &rsaquo; Bulk results loader</div>{%endblock%}
+
+{% block content %}
+<div id="content-main">
+	<form action="" method="POST">
+		{%csrf_token%}
+		<h1>Don't forget to create the round first!</h1>
+		<p>Current season: <strong>{{season}}</strong></p>
+		<p>Current round: <strong>{{round.theme}}</strong></p>
+		{%if resultstext != None %}
+			<div style="font-family: Courier, Serif;white-space:pre;" id="resultstext">
+{{resultstext}}
+			</div>
+			<input type="hidden" name="resultstext" value="{{resultstext}}" />
+			<input type="hidden" name="assign" value="true" />
+			<table>
+				<tr><th>Person</th><th>Maps to</th><th>Tech</th><th>Them</th><th>Impact</th><th>Total</th></tr>
+				{%for item in resultsarr %}
+				{{item|safe}}
+				{%endfor%}
+			</table>
+		{%else%}
+			<p><textarea id="resultstext" name="resultstext" rows=50 cols=60></textarea></p>
+		{%endif%}
+
+		<input type="submit" value="Submit" />
+	</form>
+</div>
+{% endblock %}
