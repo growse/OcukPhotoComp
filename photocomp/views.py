@@ -17,8 +17,15 @@ def season(request,season_name=None):
 	if len(rounds)==0:
 		return render_to_response('season.html',{'season':season},c)
 	else:
-		latestround=rounds.reverse()[0]
-		winner = Entry.objects.filter(round=latestround).order_by('-total_score')[0]
+		winner = None
+		rounds = rounds.reverse()
+		counter = 0
+		while winner == None:
+			latestround = rounds[counter]
+			entries = Entry.objects.filter(round=latestround).order_by('-total_score')
+			if len(entries) > 0:
+				winner=entries[0]
+			counter+=1
 		seasonscores=Entry.objects.values('person__name','round__season').filter(round__season=season).annotate(total=Sum('total_score'), entered=Count('round')).order_by('-total')
 
 		rank = 1

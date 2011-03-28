@@ -19,8 +19,10 @@ def bulkadd(request):
 				if mapname=='new':
 					person = Person(name=bits[0])
 					person.save()
-				else:
+				elif mapname==None:
 					person=Person.objects.get(name=bits[0])
+				else:
+					person=Person.objects.get(id=mapname)
 				thisentry=Entry(person=person,round=thisround,technical_score=bits[1],theme_score=bits[2],impact_score=bits[3],total_score=bits[4])
 				thisentry.save()
 
