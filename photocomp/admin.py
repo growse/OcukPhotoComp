@@ -7,6 +7,7 @@ class EntryInline(admin.TabularInline):
 	fields = ['comments','person','total_score','image']
 	readonly_fields = ['person','image']
 	extra = 0
+	ordering = ['person__name']
 
 class RoundAdmin(admin.ModelAdmin):
 	fields = ['theme','number','season']
