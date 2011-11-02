@@ -4,8 +4,8 @@ from django.contrib import admin
 
 class EntryInline(admin.TabularInline):
 	model = Entry
-	fields = ['comments','person','total_score','image']
-	readonly_fields = ['person','image']
+	fields = ['id','comments','person','technical_score','theme_score','impact_score','total_score','image']
+	readonly_fields = ['id','image']
 	extra = 0
 	ordering = ['person__name']
 
