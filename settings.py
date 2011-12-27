@@ -82,12 +82,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'ocukphotocomp.urls'
@@ -113,6 +115,16 @@ INSTALLED_APPS = (
 )
 
 FORCE_SCRIPT_NAME = ''
+
+CACHES = {
+	'default': {
+		'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+		'LOCATION': '/var/tmp/django_cache',
+	}
+}
+
+CACHE_MIDDLEWARE_KEY_PREFIX='growse_com_photocomp'
+CACHE_MIDDLEWARE_SECONDS=300
 
 try:
 	    from local_settings import *
