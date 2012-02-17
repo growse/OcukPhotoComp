@@ -19,6 +19,7 @@ def bulkadd(request):
 				if mapname=='new':
 					person = Person(name=bits[0])
 					person.save()
+					person=Person.objects.get(name=bits[0])
 				elif mapname==None:
 					person=Person.objects.get(name=bits[0])
 				else:
