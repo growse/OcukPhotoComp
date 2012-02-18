@@ -1,0 +1,236 @@
+body {
+	font-family: "Helvetica", "Arial", Sans-serif;
+	font-size: 12px;
+	background: url("http://cdn1.res.growse.com/img/ocukphotocomp/stripe.png");
+	margin: 0;
+	padding: 0;
+}
+
+img a {
+	border: 0;
+}
+
+#content a {
+	text-decoration: none;
+	color: #555;
+	border-bottom: 1px dotted #999;
+}
+
+#content a:hover {
+	border-bottom: 1px solid #999;
+}
+
+#content a.notext {
+	border:none;
+}
+
+header {
+	margin: 0;
+	color: #fff;
+	height: 100px;
+}
+
+header #search {
+	float: right;
+}
+
+header #search fieldset {
+	border: 0;
+	padding: 10px;
+}
+
+header #search a {
+	text-decoration: none;
+}
+
+header p {
+	background: url("http://cdn1.res.growse.com/img/ocukphotocomp/banner.png") 10px center no-repeat #333;
+	font-family: "Tahoma","Arial", Sans-serif;
+	margin: 0;
+	font-size: 28px;
+	color: #aaa;
+	height: 62px;
+}
+
+header p span {
+	display: none;
+}
+
+header a {
+}
+
+header ul {
+	margin: 0;
+	padding: 5px;
+	list-style-type: none;
+	background: #555;
+}
+
+header ul li {
+	margin: 5px 3px;
+	display: inline;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+header ul li a {
+	font-weight: normal;
+	color: #fff;
+	text-decoration: none;
+}
+
+header ul#roundsmenu {
+	background-color:#777;
+}
+
+#content {
+	padding: 15px;
+	margin: 15px auto;
+	border: 1px solid #aaa;
+	border-radius:15px;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	box-shadow: 0px 0px 15px #818181;
+	-moz-box-shadow: 0px 0px 15px #818181;
+	-webkit-box-shadow: 0px 0px 15px #818181;
+	background-color: #fff;
+	width: 900px;
+	color: #333;
+}
+
+#content  h1 {
+	font-size: 36px;
+	margin: 0;
+}
+
+#content h2 {
+	font-size: 30px;
+	margin: 10px 0;
+}
+
+.sidebox {
+	width: 200px;
+	padding: 0px;
+	border: 1px solid #999;
+	float: right;
+	-moz-border-radius:5px;
+}
+
+.sidebox h3 {
+	padding: 5px;
+	margin:0;
+	background-color: #ccc;
+	border-width: 0 0 1px 0;
+	border-style:solid;
+	border-color: #999;
+}
+
+.sidebox ul{
+	list-style-type:none;
+	margin: 5px;
+	padding: 0;
+} 
+
+.sidebox ul li {
+	margin: 3px 0;
+}
+
+#round_entries div {
+	padding: 10px 0;
+	border-bottom: 1px solid #999;
+	overflow:hidden;
+}
+
+#round_entries div a.notext {
+	float: right;
+}
+
+#round_entries p.comments {
+	white-space: pre-line;
+	font-style:italic;
+	width: 500px;
+	margin-left: 150px;
+	min-height: 72px;
+	background: url("http://cdn1.res.growse.com/img/ocukphotocomp/quote.png") top left no-repeat;
+}
+
+#round_entries table {
+	float: left;
+}
+
+#usergallery #selected {
+        float: left;
+}
+
+#usergallery #selectedcaption {
+        text-align:center;
+        font-weight: bold;
+}
+
+#usergallery ul {
+        float:left;
+        width: 340px;
+        list-style-type: none;
+        margin: 0 0 10px 70px;
+        padding: 0;
+}
+
+#usergallery ul li {
+        float: left;
+        width: 100px;
+        height: 100px;
+        margin: 3px;
+        text-align: center;
+}
+
+ul#regeneratethumbnails {
+        list-style-type: none;
+}
+
+ul#regeneratethumbnails li {
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        overflow: hidden;
+        display: block;
+        float: left;
+        border: 1px solid black;
+        padding: 3px;
+}
+
+#content table {
+	background: #ccc;
+}
+
+#content table td {
+	background: #fff;
+	text-align: center;
+	padding: 5px;
+}
+#content table th {
+	background: #ededed;
+	padding: 5px;
+}
+
+.clear_r {
+	clear: right;
+}
+
+.clear_l {
+	clear: left;
+}
+
+footer {
+	clear:both;
+}
+
+.ui-autocomplete-category {
+	font-weight: bold;
+}
+
+p.imgcaption {
+	margin: 0;
+	font-size: 80%;
+	font-weight: bold;
+}
+
