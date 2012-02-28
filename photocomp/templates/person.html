@@ -15,14 +15,14 @@
 
 <div id="usergallery">
     <div id="selected">
-	    <a class="notext" rel="lightbox" href="{{photo_url|random}}{{entries.0.image_large}}.jpg" title="{{entries.0.round.theme}} ({{entries.0.round.season.name}}) - Score: {{entries.0.total_score}}"><img src="{{photo_url|random}}{{entries.0.image_medium}}.jpg" alt="{{entries.0.round.theme}} ({{entries.0.round.season.name}}) - Score: {{entries.0.total_score}}"/></a>
-	    <p id="selectedcaption"><a href="/rounds/{{entries.0.round.season.name}}/{{entries.0.round.theme}}/#{{person.name}}" title="{{entries.0.round.theme}} ({{entries.0.round.season.name}})">{{entries.0.round.theme}} ({{entries.0.round.season.name}})</a> - Score: {{entries.0.total_score}}</p>
+	    <a class="notext" data-rel="lightbox" href="{{photo_url|random}}{{entries.0.image_large|urlencode}}.jpg" title="{{entries.0.round.theme}} ({{entries.0.round.season.name}}) - Score: {{entries.0.total_score}}"><img src="{{photo_url|random}}{{entries.0.image_medium|urlencode}}.jpg" alt="{{entries.0.round.theme}} ({{entries.0.round.season.name}}) - Score: {{entries.0.total_score}}"/></a>
+	    <p id="selectedcaption"><a href="/rounds/{{entries.0.round.season.name}}/{{entries.0.round.theme|urlencode}}/#{{person.name|slugify}}" title="{{entries.0.round.theme}} ({{entries.0.round.season.name}})">{{entries.0.round.theme}} ({{entries.0.round.season.name}})</a> - Score: {{entries.0.total_score}}</p>
     </div>
     <ul>
 	    {% for entry in entries %}
-	    <li><a class="notext" href="javascript:selectImage('{{entry.id}}','{{entry.round.season.name}}', '{{entry.round.theme}}', '{{entry.total_score}}','{{person.name}}');" title="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}"><img width="100" height="100" src="{{photo_url|random}}{{entry.image_squarethumbnail}}.jpg" alt="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}" /></a></li>
+	    <li><a class="notext" href="javascript:selectImage('{{entry.id}}','{{entry.round.season.name}}', '{{entry.round.theme}}', '{{entry.total_score}}','{{person.name}}');" title="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}"><img width="100" height="100" src="{{photo_url|random}}{{entry.image_squarethumbnail|urlencode}}.jpg" alt="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}" /></a></li>
 	    {% endfor %}
     </ul>
-
+</div>
 
 {% endblock %}

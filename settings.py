@@ -76,6 +76,7 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+	'photocomp.context_processors.debug_mode',
 	'photocomp.context_processors.photo_url',
 	'photocomp.context_processors.season_list',
 	'django.contrib.auth.context_processors.auth',

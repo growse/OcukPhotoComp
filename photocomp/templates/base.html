@@ -1,4 +1,3 @@
-{%spaceless%}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,40 +7,43 @@
 		<link type="text/css" rel="stylesheet" href="http://res.growse.com/mincache/ocukphoto.css" />
 	</head>
 	<body>
-		<div id="body">
-			<header>
-				<div id="search">
-					<form action="/search/" method="post">
-						<fieldset>
-							{% csrf_token %}
-							<input placeholder="Search" id="searchbox" type="search" name="term" class="searchtext" />
-							<input type="image" alt="go" src="http://res.growse.com/img/ocukphotocomp/search.png" class="searchimage" />
-						</fieldset>
-					</form>
-				</div>
-				<p><span>OcUK Photo Competition</span></p>
+	<div id="body">
+		<header>
+			<div id="search">
+				<form action="/search/" method="post">
+					<fieldset>
+						{% csrf_token %}
+						<input placeholder="Search" id="searchbox" type="search" name="term" class="searchtext" />
+						<input type="image" alt="go" src="http://res.growse.com/img/ocukphotocomp/search.png" class="searchimage" />
+					</fieldset>
+				</form>
+			</div>
+			<p><span>OcUK Photo Competition</span></p>
 
-				<ul>
-					<li>Season:</li>
-					{% for season in seasons %}
-					<li><a href="/seasons/{{season.name}}/" title="{{season.name}}">{{season.name}}</a></li>
-					{% endfor %}
-				</ul>
-			</header>
-			<section id="content">
-				{% block content %}
-				{% endblock %}
-				<div class="clear_l clear_r"></div>
-			</section>
-
-		</div>
+			<ul>
+				<li>Season:</li>
+				{% for season in seasons %}<li><a href="/seasons/{{season.name}}/" title="{{season.name}}">{{season.name}}</a></li>
+				{% endfor %}
+			</ul>
+		</header>
+		<section id="content">
+			{% block content %}
+			{% endblock %}
+			<div class="clear_l clear_r"></div>
+		</section>
 	</div>
+	{% if debug_mode%}
+	<script src="http://res.growse.com/js/common/jquery.js"></script>
+	<script src="http://res.growse.com/js/common/jquery-ui.js"></script>
+	<script src="http://res.growse.com/js/common/slimbox2.js"></script>
+	<script src="http://res.growse.com/js/ocukphotocomp/photocomp.js"></script>
+	{% else %}
 	<script type="text/javascript" src="http://res.growse.com/mincache/ocukphoto.js"></script>
 <script type="text/javascript">
 	if (window.location.href.substring(0,32)=='http://ocukphotocomp.growse.com/') {
 		try {var pageTracker = _gat._getTracker("UA-185490-9");pageTracker._trackPageview();} catch(err) {}
 	}
 </script>
-</body>
+	{%endif%}
+	</body>
 </html>
-{%endspaceless%}

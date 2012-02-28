@@ -9,18 +9,18 @@
 	<h3>Rounds</h3>
 	<ul>
 		{% for round in rounds %}
-		<li><a href="/rounds/{{season.name}}/{{round.theme}}/">Round {{round.number}}: {{round.theme}}</a></li>
+		<li><a href="/rounds/{{season.name}}/{{round.theme|urlencode}}/">Round {{round.number}}: {{round.theme}}</a></li>
 		{% endfor %}
 	</ul>
 </div>
 
 <div id="seasons_content">
 	{%if season.complete %}
-	<h3>Season won by <a href="/people/{{winner.name}}/" title="{{winner.name}}">{{winner.name}}</a>. Hurrah!</h3>
-	<a title="{{winner}}'s best entry in {{season.name}} - {{bestentry.round.theme}}" class="notext" rel="lightbox" href="{{photo_url|random}}{{bestentry.image_large}}.jpg"><img src="{{photo_url|random}}{{bestentry.image_medium}}.jpg" alt="{{winner}}'s best entry in {{season.name}} - {{bestentry.round.theme}}" /></a><p class="imgcaption">{{winner}}'s best entry in {{season.name}} - <a href="/rounds/{{season.name}}/{{bestentry.round.theme}}/#{{winner.name}}">{{bestentry.round.theme}}</a></p>
+	<h3>Season won by <a href="/people/{{winner.name|urlencode}}/" title="{{winner.name}}">{{winner.name}}</a>. Hurrah!</h3>
+	<a title="{{winner}}'s best entry in {{season.name}} - {{bestentry.round.theme}}" class="notext" data-rel="lightbox" href="{{photo_url|random}}{{bestentry.image_large|urlencode}}.jpg"><img src="{{photo_url|random}}{{bestentry.image_medium|urlencode}}.jpg" alt="{{winner}}'s best entry in {{season.name}} - {{bestentry.round.theme}}" /></a><p class="imgcaption">{{winner}}'s best entry in {{season.name}} - <a href="/rounds/{{season.name}}/{{bestentry.round.theme|urlencode}}/#{{winner.name}}">{{bestentry.round.theme}}</a></p>
 	{% else %}
-	<h3>Latest round: {{latestround.number}} - {{latestround.theme}}</h3><p>Won by <a href="/people/{{winner.person.name}}/"><strong>{{winner.person.name}}</strong></a>. Hurray!</p>
-	<a title="{{winner.person.name}}'s winning entry in {{latestround.theme}}" class="notext" rel="lightbox" href="{{photo_url|random}}{{winner.image_large}}.jpg"><img src="{{photo_url|random}}{{winner.image_medium}}.jpg" alt="{{winner.person.name}}'s winning entry in {{latestround.theme}}" /></a><p class="imgcaption">{{winner.person.name}}'s winning entry in <a href='/rounds/{{season.name}}/{{latestround.theme}}/#{{winner.person.name}}'>{{latestround.theme}}</a>
+	<h3>Latest round: {{latestround.number}} - {{latestround.theme}}</h3><p>Won by <a href="/people/{{winner.person.name|urlencode}}/"><strong>{{winner.person.name}}</strong></a>. Hurray!</p>
+	<a title="{{winner.person.name}}'s winning entry in {{latestround.theme}}" class="notext" data-rel="lightbox" href="{{photo_url|random}}{{winner.image_large|urlencode}}.jpg"><img src="{{photo_url|random}}{{winner.image_medium}}.jpg" alt="{{winner.person.name}}'s winning entry in {{latestround.theme}}" /></a><p class="imgcaption">{{winner.person.name}}'s winning entry in <a href='/rounds/{{season.name}}/{{latestround.theme|urlencode}}/#{{winner.person.name}}'>{{latestround.theme}}</a>
 	{%endif%}
         <h3>The scores for this season:</h3>
 	<table>
@@ -29,8 +29,9 @@
 		</tr>
 
 		{% for score in seasonscores %}
-		<tr><td>{{score.rank}}</td><td><a href="/people/{{score.person__name}}/" title="{{score.person__name}}">{{score.person__name}}</a></td><td>{{score.total}}</td><td>{{score.entered}}</td></tr>
+		<tr><td>{{score.rank}}</td><td><a href="/people/{{score.person__name|urlencode}}/" title="{{score.person__name}}">{{score.person__name}}</a></td><td>{{score.total}}</td><td>{{score.entered}}</td></tr>
 		{% endfor %}
 	</table>
+</div>
 {%endif%}
 {% endblock %}

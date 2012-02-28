@@ -5,13 +5,12 @@
 <h2>{{round.theme}}</h2>
 <div id="round_entries">
 	{% for entry in entries %}
-	<a name="{{entry.person.name}}" />
-		<div>
-			<h3>
-				<a href="/people/{{entry.person.name}}/">{{entry.person.name}}</a> ({{entry.rank}})
+	<div id="{{entry.person.name|slugify}}">
+		<h3>
+			<a href="/people/{{entry.person.name|urlencode}}/">{{entry.person.name}}</a> ({{entry.rank}})
 		</h3>
-		<a class="notext" title="{{entry.person.name}} - Score: {{entry.total_score}}" href="{{photo_url|random}}{{entry.image_large}}.jpg" rel="lightbox[round]">
-			<img width="200" alt="{{entry.person.name}} entry" src="{{photo_url|random}}{{entry.image_thumbnail}}.jpg" />
+		<a title="{{entry.person.name}} - Score: {{entry.total_score}}" href="{{photo_url|random}}{{entry.image_large|urlencode}}.jpg" class="notext" data-rel="lightbox[round]">
+			<img width="200" alt="{{entry.person.name}} entry" src="{{photo_url|random}}{{entry.image_thumbnail|urlencode}}.jpg" />
 		</a>
 		<table>
 			<tr><th>Technical Score:</th><td>{{entry.technical_score}}</td></tr>
@@ -21,7 +20,7 @@
 		</table>
 		<p class="comments">{% if entry.comments %}	{{entry.comments}}{% else %}No Comments found for this entry.{% endif %}</p>
 		<p class="clear_r"></p>
-		</div>
+	</div>
 	{% endfor %}
 </div>
 
