@@ -20,7 +20,10 @@ class EntryAdmin(admin.ModelAdmin):
 	actions = ['generate_thumbnails']
 
 
+class PersonAdmin(admin.ModelAdmin):
+	search_fields = ['name']
+
 admin.site.register(Season)
 admin.site.register(Round,RoundAdmin)
 admin.site.register(Entry,EntryAdmin)
-admin.site.register(Person)
+admin.site.register(Person,PersonAdmin)
