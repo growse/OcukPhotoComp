@@ -1,4 +1,4 @@
-from photocomp.models import Season,Round,Entry,Person
+from ocukphotocomp.photocomp.models import Season,Round,Entry,Person
 from django.contrib import admin
 
 

@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.db.models import Count,Sum,Avg
 from django.http import Http404
-from photocomp.models import Season,Round,Person,Entry
+from ocukphotocomp.photocomp.models import Season,Round,Person,Entry
 
 def season(request,season_name=None):
         c=RequestContext(request)

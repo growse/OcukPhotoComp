@@ -1,7 +1,7 @@
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from photocomp.models import Season,Round,Person,Entry
+from ocukphotocomp.photocomp.models import Season,Round,Person,Entry
 import zipfile, os.path, shutil
 
 def bulkadd(request):

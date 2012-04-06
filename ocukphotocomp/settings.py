@@ -64,7 +64,7 @@ PHOTO_URL = (
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+STATIC_URL = '/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'g%l6i8$k8oc2%ck(i65a=0z7es@a4%oc9h2rrop=v^lmoy2+$y'
@@ -77,9 +77,9 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-	'photocomp.context_processors.debug_mode',
-	'photocomp.context_processors.photo_url',
-	'photocomp.context_processors.season_list',
+	'ocukphotocomp.photocomp.context_processors.debug_mode',
+	'ocukphotocomp.photocomp.context_processors.photo_url',
+	'ocukphotocomp.photocomp.context_processors.season_list',
 	'django.contrib.auth.context_processors.auth',
 )
 
@@ -109,7 +109,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'photocomp',
+    'ocukphotocomp.photocomp',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
