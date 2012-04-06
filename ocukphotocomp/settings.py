@@ -51,7 +51,6 @@ MEDIA_ROOT = ''
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/'
-STATIC_URL='/'
 
 #Customer MEDIA URL for ocukphotocomp photos
 PHOTO_URL = (
@@ -64,7 +63,7 @@ PHOTO_URL = (
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-STATIC_URL = '/media/'
+STATIC_URL='/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'g%l6i8$k8oc2%ck(i65a=0z7es@a4%oc9h2rrop=v^lmoy2+$y'
@@ -112,6 +111,7 @@ INSTALLED_APPS = (
     'ocukphotocomp.photocomp',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'django.contrib.sitemaps',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
