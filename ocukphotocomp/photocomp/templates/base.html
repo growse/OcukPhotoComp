@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 		<title>OcUK Photo Competition</title>
 		<link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css" />
-		<link type="text/css" rel="stylesheet" href="http://res.growse.com/mincache/ocukphoto.css" />
+		<link type="text/css" rel="stylesheet" href="http://{{cdn_url}}/mincache/ocukphoto.css" />
 	</head>
 	<body>
 	<div id="body">
@@ -14,7 +14,7 @@
 					<fieldset>
 						{% csrf_token %}
 						<input placeholder="Search" id="searchbox" type="search" name="term" class="searchtext" />
-						<input type="image" alt="go" src="http://res.growse.com/img/ocukphotocomp/search.png" class="searchimage" />
+						<input type="image" alt="go" src="http://{{cdn_url}}/img/ocukphotocomp/search.png" class="searchimage" />
 					</fieldset>
 				</form>
 			</div>
@@ -38,7 +38,7 @@
 	<script src="http://res.growse.com/js/common/slimbox2.js"></script>
 	<script src="http://res.growse.com/js/ocukphotocomp/photocomp.js"></script>
 	{% else %}
-	<script type="text/javascript" src="http://res.growse.com/mincache/ocukphoto.js"></script>
+	<script type="text/javascript" src="http://{{cdn_url}}/mincache/ocukphoto.js"></script>
 <script type="text/javascript">
 	if (window.location.href.substring(0,32)=='http://ocukphotocomp.growse.com/') {
 		try {var pageTracker = _gat._getTracker("UA-185490-9");pageTracker._trackPageview();} catch(err) {}
