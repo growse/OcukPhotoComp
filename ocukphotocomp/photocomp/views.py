@@ -18,7 +18,6 @@ def season(request,season_name=None):
 		return render_to_response('season.html',{'season':season},c)
 	else:
 		winner = None
-		rounds = rounds.reverse()
 		counter = 0
 		while winner == None:
 			latestround = rounds[counter]
@@ -66,8 +65,11 @@ def round(request,season_name,round_theme):
 		else:
 			entry.rank = "%s=" % rank
 			previous.rank = entry.rank
-		previous = entry
-	return render_to_response('round.html',{'round':round,'entries':entries,'ranks':ranks},c)
+	previous = entry
+
+	season = get_object_or_404(Season,name=season_name)
+	rounds = Round.objects.filter(season=season).order_by('number')
+	return render_to_response('round.html',{'season':season,'rounds':rounds,'round':round,'entries':entries,'ranks':ranks},c)
 
 def person (request,person_name):
 	c=RequestContext(request)

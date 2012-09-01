@@ -61,7 +61,7 @@ class Entry(models.Model):
 	comments = models.TextField()
 	@property
 	def image(self):
-		return str(self.id)+"_"+self.round.season.name+"_"+self.round.theme+"_"+self.person.name
+		return str(self.id)
 	@property
 	def image_large(self):
 		return self.image+"_FULL"
