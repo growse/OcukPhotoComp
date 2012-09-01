@@ -1,6 +1,6 @@
 # Django settings for ocukphotocomp project.
 import sys
-if not 'runserver' in sys.argv and not  'runserver_plus':
+if not 'runserver' in sys.argv:
 	DEBUG=False
 else:
 	DEBUG=True
@@ -65,8 +65,6 @@ PHOTO_URL = (
 	'http://ocukimages4.growse.com/',
 )
 
-
-
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -92,16 +90,19 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'photocomp': {
         'source_filenames': (
+		  'js/scripts.js',
           'js/jquery-*.min.js',
           'js/jquery.*.js',
-          'js/*.js',
+          'js/bootstrap.min.js',
+		  'js/slimbox2.js',
         ),
         'output_filename': 'js/photocomp.js',
     }
 }
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
-PIPELINE_JS_COMPRESSOR = None 
-
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+PIPELINE_YUI_BINARY = '/usr/bin/yui-compressor'
+PIPELINE_DISABLE_WRAPPER = True
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'g%l6i8$k8oc2%ck(i65a=0z7es@a4%oc9h2rrop=v^lmoy2+$y'
 
@@ -157,15 +158,15 @@ INSTALLED_APPS = (
 
 FORCE_SCRIPT_NAME = ''
 
-CACHES = {
-	'default': {
-		'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-		'LOCATION': '/var/tmp/django_cache',
-	}
-}
+#CACHES = {
+#	'default': {
+#		'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#		'LOCATION': '/var/tmp/django_cache',
+#	}
+#}
 
-CACHE_MIDDLEWARE_KEY_PREFIX='growse_com_photocomp'
-CACHE_MIDDLEWARE_SECONDS=300
+#CACHE_MIDDLEWARE_KEY_PREFIX='growse_com_photocomp'
+#CACHE_MIDDLEWARE_SECONDS=300
 
 
 try:

@@ -23,7 +23,7 @@
 		<div class="span5 pull-right">
 	    	<ul class="thumbnails">
 		    	{% for entry in entries %}
-		    	<li><a class="notext" href="javascript:selectImage('{{entry.id}}','{{entry.round.season.name}}', '{{entry.round.theme}}', '{{entry.total_score}}','{{person.name}}');" title="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}"><img class="thumbnail" width="100" height="100" src="{{photo_url|random}}{{entry.image_squarethumbnail|urlencode}}.jpg" alt="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}" /></a></li>
+		    	<li><a class="notext" href="javascript:photocomp.selectImage('{{entry.id}}','{{entry.round.season.name}}', '{{entry.round.theme}}', '{{entry.total_score}}','{{person.name}}');" title="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}"><img class="thumbnail" width="100" height="100" src="{{photo_url|random}}{{entry.image_squarethumbnail|urlencode}}.jpg" alt="{{entry.round.theme}} ({{entry.round.season.name}}) - Score: {{entry.total_score}}" /></a></li>
 			    {% endfor %}
 			</ul>
 		</div>

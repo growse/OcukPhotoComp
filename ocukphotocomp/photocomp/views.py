@@ -14,6 +14,7 @@ def season(request,season_name=None):
 	else:
 		season = get_object_or_404(Season,name=season_name)
 	rounds = Round.objects.filter(season=season).order_by('number')
+	rounds = rounds.reverse()
 	if len(rounds)==0:
 		return render_to_response('season.html',{'season':season},c)
 	else:
@@ -46,6 +47,7 @@ def season(request,season_name=None):
 			winner = Person.objects.all().filter(name=seasonscores[0]['person__name'])[0]
 			bestentry = Entry.objects.all().filter(person=winner,round__season=season).order_by('-total_score')[0]
 	
+		rounds = rounds.reverse()
 		return render_to_response('season.html',{'season':season,'rounds':rounds,'latestround':latestround,'winner':winner,'seasonscores':seasonscores,'bestentry':bestentry},c)
 
 def round(request,season_name,round_theme):
