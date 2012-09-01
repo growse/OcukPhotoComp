@@ -1,8 +1,11 @@
 # Django settings for ocukphotocomp project.
+import sys
+if not 'runserver' in sys.argv and not  'runserver_plus':
+	DEBUG=False
+else:
+	DEBUG=True
 
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
 ADMINS = (
     ('Andrew Rowson', 'andrew@growse.com'),
 )
@@ -67,9 +70,12 @@ PHOTO_URL = (
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-STATIC_ROOL='/var/www/growse.com/res/django-static/ocukphotocomp/'
+STATIC_ROOT='/var/www/growse.com/res/django-static/ocukphotocomp/'
 STATICFILES_DIRS=('/home/growse/django-sites/ocukphotocomp/static/',)
-STATIC_URL='//cdn1.res.growse.com/django-static/ocukphotocomp/'
+if DEBUG:
+	STATIC_URL='//res.growse.com/django-static/ocukphotocomp/'
+else:
+	STATIC_URL='//cdn1.res.growse.com/django-static/ocukphotocomp/'
 STATICFILES_STORAGE='pipeline.storage.PipelineCachedStorage'
 PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
 PIPELINE_CSS = {
@@ -84,11 +90,11 @@ PIPELINE_CSS = {
     },
 }
 PIPELINE_JS = {
-    'stats': {
+    'photocomp': {
         'source_filenames': (
           'js/jquery-*.min.js',
           'js/jquery.*.js',
-          'js/scripts.js',
+          'js/*.js',
         ),
         'output_filename': 'js/photocomp.js',
     }
@@ -160,6 +166,7 @@ CACHES = {
 
 CACHE_MIDDLEWARE_KEY_PREFIX='growse_com_photocomp'
 CACHE_MIDDLEWARE_SECONDS=300
+
 
 try:
 	    from local_settings import *
