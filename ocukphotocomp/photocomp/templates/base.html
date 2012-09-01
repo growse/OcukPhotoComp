@@ -1,49 +1,51 @@
+{% load static from staticfiles %}
+{% load compressed %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 		<title>OcUK Photo Competition</title>
-		<link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css" />
-		<link type="text/css" rel="stylesheet" href="http://{{cdn_url}}/mincache/ocukphoto.css" />
+		{% compressed_css 'photocomp' %}
 	</head>
 	<body>
-	<div id="body">
-		<header>
-			<div id="search">
-				<form action="/search/" method="post">
-					<fieldset>
-						{% csrf_token %}
-						<input placeholder="Search" id="searchbox" type="search" name="term" class="searchtext" />
-						<input type="image" alt="go" src="http://{{cdn_url}}/img/ocukphotocomp/search.png" class="searchimage" />
-					</fieldset>
-				</form>
+		<div class="navbar navbar-static-top navbar-inverse">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="#">OcUK Photo Competition</a>
+					<ul class="nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Season <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								{% for season in seasons %}<li><a href="/seasons/{{season.name}}/" title="{{season.name}}">{{season.name}}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+					</ul>
+					<form action="/search/" method="post" class="navbar-search pull-right">
+						<fieldset>
+							{% csrf_token %}
+							<input placeholder="Search" id="searchbox" type="search" name="term" class="searchtext" />
+						</fieldset>
+					</form>
+				</div>
 			</div>
-			<p><span>OcUK Photo Competition</span></p>
-
-			<ul>
-				<li>Season:</li>
-				{% for season in seasons %}<li><a href="/seasons/{{season.name}}/" title="{{season.name}}">{{season.name}}</a></li>
-				{% endfor %}
-			</ul>
-		</header>
-		<section id="content">
+		</div>
+		<div style="padding-top: 10px;" class="container">
 			{% block content %}
 			{% endblock %}
-			<div class="clear_l clear_r"></div>
-		</section>
-	</div>
-	{% if debug_mode%}
-	<script src="http://res.growse.com/js/common/jquery.js"></script>
-	<script src="http://res.growse.com/js/common/jquery-ui.js"></script>
-	<script src="http://res.growse.com/js/common/slimbox2.js"></script>
-	<script src="http://res.growse.com/js/ocukphotocomp/photocomp.js"></script>
-	{% else %}
-	<script type="text/javascript" src="http://{{cdn_url}}/mincache/ocukphoto.js"></script>
-<script type="text/javascript">
-	if (window.location.href.substring(0,32)=='http://ocukphotocomp.growse.com/') {
-		try {var pageTracker = _gat._getTracker("UA-185490-9");pageTracker._trackPageview();} catch(err) {}
-	}
-</script>
-	{%endif%}
+		</div>
+		{% compressed_js 'photocomp' %}
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-185490-9']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>		
 	</body>
 </html>

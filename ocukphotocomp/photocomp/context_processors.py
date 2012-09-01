@@ -9,4 +9,4 @@ def photo_url(request):
 
 def season_list(request):
 	from models import Season
-	return {'seasons':Season.objects.all()}
+	return {'seasons':Season.objects.all().order_by('-name')}

@@ -1,11 +1,16 @@
 # Django settings for ocukphotocomp project.
+import sys
+if not 'runserver' in sys.argv and not  'runserver_plus':
+	DEBUG=False
+else:
+	DEBUG=True
 
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
 ADMINS = (
     ('Andrew Rowson', 'andrew@growse.com'),
 )
+
+CDN_URL = ('cdn1.res.growse.com')
 
 MANAGERS = ADMINS
 
@@ -60,13 +65,42 @@ PHOTO_URL = (
 	'http://ocukimages4.growse.com/',
 )
 
-CDN_URL = ('cdn1.res.growse.com')
 
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-STATIC_URL='/'
+STATIC_ROOT='/var/www/growse.com/res/django-static/ocukphotocomp/'
+STATICFILES_DIRS=('/home/growse/django-sites/ocukphotocomp/static/',)
+if DEBUG:
+	STATIC_URL='//res.growse.com/django-static/ocukphotocomp/'
+else:
+	STATIC_URL='//cdn1.res.growse.com/django-static/ocukphotocomp/'
+STATICFILES_STORAGE='pipeline.storage.PipelineCachedStorage'
+PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
+PIPELINE_CSS = {
+    'photocomp': {
+        'source_filenames': (
+          'css/*.css',
+        ),
+        'output_filename': 'css/photocomp.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+PIPELINE_JS = {
+    'photocomp': {
+        'source_filenames': (
+          'js/jquery-*.min.js',
+          'js/jquery.*.js',
+          'js/*.js',
+        ),
+        'output_filename': 'js/photocomp.js',
+    }
+}
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
+PIPELINE_JS_COMPRESSOR = None 
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'g%l6i8$k8oc2%ck(i65a=0z7es@a4%oc9h2rrop=v^lmoy2+$y'
@@ -86,14 +120,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
+#    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+#    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'ocukphotocomp.urls'
@@ -106,6 +140,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+	'django.contrib.staticfiles',		
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -117,6 +152,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'pipeline',
 )
 
 FORCE_SCRIPT_NAME = ''
@@ -130,6 +166,7 @@ CACHES = {
 
 CACHE_MIDDLEWARE_KEY_PREFIX='growse_com_photocomp'
 CACHE_MIDDLEWARE_SECONDS=300
+
 
 try:
 	    from local_settings import *

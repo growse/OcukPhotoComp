@@ -1,27 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{round.season.name}} Season</h1>
-<h2>{{round.theme}}</h2>
-<div id="round_entries">
-	{% for entry in entries %}
-	<div id="{{entry.person.name|slugify}}">
-		<h3>
-			<a href="/people/{{entry.person.name|urlencode}}/">{{entry.person.name}}</a> ({{entry.rank}})
-		</h3>
-		<a title="{{entry.person.name}} - Score: {{entry.total_score}}" href="{{photo_url|random}}{{entry.image_large|urlencode}}.jpg" class="notext" data-rel="lightbox[round]">
-			<img width="200" alt="{{entry.person.name}} entry" src="{{photo_url|random}}{{entry.image_thumbnail|urlencode}}.jpg" />
-		</a>
-		<table>
-			<tr><th>Technical Score:</th><td>{{entry.technical_score}}</td></tr>
-			<tr><th>Theme Score:</th><td>{{entry.theme_score}}</td></tr>
-			<tr><th>Impact Score:</th><td>{{entry.impact_score}}</td></tr>
-			<tr><th>Total Score:</th><td>{{entry.total_score}}</td></tr>
-		</table>
-		<p class="comments">{% if entry.comments %}	{{entry.comments}}{% else %}No Comments found for this entry.{% endif %}</p>
-		<p class="clear_r"></p>
+<div class="row">
+	<div class="span3">
+		<div class="well" style="padding: 8px 0;">
+			<ul class="nav nav-list">
+				<li class="nav-header">Rounds</li>
+				{% for sround in rounds %}
+				{% if sround.number == round.number %}
+				<li class="active">
+				{% else %}
+				<li>
+				{% endif %}
+				<a href="/rounds/{{season.name}}/{{sround.theme|urlencode}}/">{{sround.number}}: {{sround.theme}}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
 	</div>
-	{% endfor %}
+	<div class="span9">
+		<h1>{{season.name}} Season</h1>
+		<h2>{{round.theme}}</h2>
+		{% for entry in entries %}
+		<div id="{{entry.person.name|slugify}}" class="row">
+			<div class="span9">
+				<h3>
+					<a href="/people/{{entry.person.name|urlencode}}/">{{entry.person.name}}</a> ({{entry.rank}})
+				</h3>
+			</div>
+			<div class="span6">
+				<table class="table">
+					<tr><th>Technical Score:</th><td>{{entry.technical_score}}</td></tr>
+					<tr><th>Theme Score:</th><td>{{entry.theme_score}}</td></tr>
+					<tr><th>Impact Score:</th><td>{{entry.impact_score}}</td></tr>
+					<tr><th>Total Score:</th><td>{{entry.total_score}}</td></tr>
+				</table>
+				<h4>Comments:</h4>
+				<p class="comments" style="white-space: pre-line;">{% if entry.comments %}	{{entry.comments}}{% else %}No Comments found for this entry.{% endif %}</p>
+			</div>
+			<div class="span3">
+				<a title="{{entry.person.name}} - Score: {{entry.total_score}}" href="{{photo_url|random}}{{entry.image_large|urlencode}}.jpg" class="notext thumbnail pull-right" rel="lightbox[round]">
+					<img width="200" alt="{{entry.person.name}} entry" src="{{photo_url|random}}{{entry.image_thumbnail|urlencode}}.jpg" />
+				</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	</div>
 </div>
 
 {% endblock %}
