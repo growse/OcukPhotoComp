@@ -89,7 +89,7 @@ def uploadimagezip(request):
 			imagefile = entry.person.name+'.jpg'
 			if os.path.exists(os.path.join(directory,imagefile)):
 				results+="Found entry "+imagefile+"\n"
-				newfilename = str(entry.id)+"_"+thisround.season.name+"_"+thisround.theme+"_"+entry.person.name+"_FULL.jpg"
+				newfilename = str(entry.id)+"_FULL.jpg"
 				results+="Moving file to "+newfilename+"\n"
 				shutil.move(os.path.join(directory,imagefile),os.path.join(finalimagedir,newfilename))
 			else:
