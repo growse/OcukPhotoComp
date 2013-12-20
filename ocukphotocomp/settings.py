@@ -70,43 +70,50 @@ PHOTO_URL = (
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-STATIC_ROOT = '/var/www/growse.com/res/django-static/ocukphotocomp/'
-STATICFILES_DIRS = ('/home/growse/django-sites/ocukphotocomp/static/',)
+PIPELINE = True
 if DEBUG:
-    STATIC_URL = '//res.growse.com/django-static/ocukphotocomp/'
+    STATIC_ROOT = 'static-root'
+else:
+    STATIC_ROOT = '/var/www/res.growse.com/django-static/ocukphotocomp/'
+
+STATICFILES_DIRS = ('static/',)
+
+if DEBUG:
+    STATIC_URL = '/static/'
 else:
     STATIC_URL = '//cdn1.res.growse.com/django-static/ocukphotocomp/'
-    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-    PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
-    PIPELINE_CSS = {
-        'photocomp': {
-            'source_filenames': (
-                'css/*.css',
-            ),
-            'output_filename': 'css/photocomp.css',
-            'extra_context': {
-                'media': 'screen,projection',
-            },
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
+PIPELINE_CSS = {
+    'photocomp': {
+        'source_filenames': (
+            'css/*.css',
+        ),
+        'output_filename': 'css/photocomp.css',
+        'extra_context': {
+            'media': 'screen,projection',
         },
+    },
+}
+PIPELINE_JS = {
+    'photocomp': {
+        'source_filenames': (
+            'js/scripts.js',
+            'js/jquery-*.min.js',
+            'js/jquery.*.js',
+            'js/bootstrap.min.js',
+            'js/slimbox2.js',
+        ),
+        'output_filename': 'js/photocomp.js',
     }
-    PIPELINE_JS = {
-        'photocomp': {
-            'source_filenames': (
-                'js/scripts.js',
-                'js/jquery-*.min.js',
-                'js/jquery.*.js',
-                'js/bootstrap.min.js',
-                'js/slimbox2.js',
-            ),
-            'output_filename': 'js/photocomp.js',
-        }
-    }
-    PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
-    PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
-    PIPELINE_YUI_BINARY = '/usr/bin/yui-compressor'
-    PIPELINE_DISABLE_WRAPPER = True
-    # Make this unique, and don't share it with anybody.
-    SECRET_KEY = 'g%l6i8$k8oc2%ck(i65a=0z7es@a4%oc9h2rrop=v^lmoy2+$y'
+}
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+PIPELINE_YUI_BINARY = '/usr/bin/yui-compressor'
+PIPELINE_DISABLE_WRAPPER = True
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
