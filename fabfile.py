@@ -14,4 +14,4 @@ def deploy():
             run('pip install --upgrade -r requirements.txt')
             run('./manage.py migrate photocomp')
             run('./manage.py collectstatic --noinput')
-            sudo('touch /etc/uwsgi/apps-enabled/ocukphotocomp.growse.com.ini')
+            sudo('/etc/init.d/uwsgi restart')
