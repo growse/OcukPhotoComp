@@ -168,6 +168,11 @@ INSTALLED_APPS = (
 
 FORCE_SCRIPT_NAME = ''
 
+EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+MAILGUN_ACCESS_KEY = 'key-5nvxiijjtshdf7p8ra3vdhgkishcq587'
+MAILGUN_SERVER_NAME = 'growse.com'
+DEFAULT_FROM_EMAIL = 'blog@growse.com'
+
 #CACHES = {
 #	'default': {
 #		'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
