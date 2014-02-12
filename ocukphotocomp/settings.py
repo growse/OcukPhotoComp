@@ -143,10 +143,10 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'ocukphotocomp.urls'
 
 TEMPLATE_DIRS = (
-# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-# Always use forward slashes, even on Windows.
-#! Don't forget to use absolute paths, not relative paths.
-#"/home/growse/django/templates",
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    #! Don't forget to use absolute paths, not relative paths.
+    #"/home/growse/django/templates",
 )
 
 INSTALLED_APPS = (
@@ -178,6 +178,7 @@ FORCE_SCRIPT_NAME = ''
 #CACHE_MIDDLEWARE_KEY_PREFIX='growse_com_photocomp'
 #CACHE_MIDDLEWARE_SECONDS=300
 
+ALLOWED_HOSTS = ['ocukphotocomp.growse.com']
 
 try:
     from local_settings import *
