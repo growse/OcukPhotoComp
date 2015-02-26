@@ -12,42 +12,42 @@ def season(request,season_name=None):
         season=Season.latest()
     else:
         season = get_object_or_404(Season,name=season_name)
-        rounds = Round.objects.filter(season=season).order_by('number')
-        rounds = rounds.reverse()
-        if len(rounds)==0:
-            return render_to_response('season.html',{'season':season},c)
+    rounds = Round.objects.filter(season=season).order_by('number')
+    rounds = rounds.reverse()
+    if len(rounds)==0:
+        return render_to_response('season.html',{'season':season},c)
+    else:
+        winner = None
+        counter = 0
+        while winner == None:
+            latestround = rounds[counter]
+            entries = Entry.objects.filter(round=latestround).order_by('-total_score')
+            if len(entries) > 0:
+                winner=entries[0]
+                counter+=1
+                seasonscores=Entry.objects.values('person__name','round__season').filter(round__season=season).annotate(total=Sum('total_score'), entered=Count('round')).order_by('-total')
+
+    rank = 1
+    previous = None
+    seasonscores = list(seasonscores)
+    previous = seasonscores[0]
+    previous['rank'] = 1
+    for i, entry in enumerate(seasonscores[1:]):
+        if entry['total'] != previous['total']:
+            rank = i + 2
+            entry['rank'] = str(rank)
         else:
-            winner = None
-            counter = 0
-            while winner == None:
-                latestround = rounds[counter]
-                entries = Entry.objects.filter(round=latestround).order_by('-total_score')
-                if len(entries) > 0:
-                    winner=entries[0]
-                    counter+=1
-                    seasonscores=Entry.objects.values('person__name','round__season').filter(round__season=season).annotate(total=Sum('total_score'), entered=Count('round')).order_by('-total')
+            entry['rank'] = "%s=" % rank
+            previous['rank'] = entry['rank']
+            previous = entry
 
-        rank = 1
-        previous = None
-        seasonscores = list(seasonscores)
-        previous = seasonscores[0]
-        previous['rank'] = 1
-        for i, entry in enumerate(seasonscores[1:]):
-            if entry['total'] != previous['total']:
-                rank = i + 2
-                entry['rank'] = str(rank)
-            else:
-                entry['rank'] = "%s=" % rank
-                previous['rank'] = entry['rank']
-                previous = entry
+    bestentry = None
+    if season.complete:
+        winner = Person.objects.all().filter(name=seasonscores[0]['person__name'])[0]
+        bestentry = Entry.objects.all().filter(person=winner,round__season=season).order_by('-total_score')[0]
 
-        bestentry = None
-        if season.complete:
-            winner = Person.objects.all().filter(name=seasonscores[0]['person__name'])[0]
-            bestentry = Entry.objects.all().filter(person=winner,round__season=season).order_by('-total_score')[0]
-
-        rounds = rounds.reverse()
-        return render_to_response('season.html',{'season':season,'rounds':rounds,'latestround':latestround,'winner':winner,'seasonscores':seasonscores,'bestentry':bestentry},c)
+    rounds = rounds.reverse()
+    return render_to_response('season.html',{'season':season,'rounds':rounds,'latestround':latestround,'winner':winner,'seasonscores':seasonscores,'bestentry':bestentry},c)
 
 def round(request,season_name,round_theme):
     c=RequestContext(request)
